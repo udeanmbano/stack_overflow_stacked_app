@@ -9,6 +9,7 @@ const double kAppBarLogoHeight = 40.0;
 const double kLeadingImageWidth = 35.0;
 const double kLeadingImageSize = 24.0;
 const double kChevronIconSize = 48.0;
+const double kSearchIconSize = 32.0;
 const double kTrailingSectionWidth = 115.0;
 
 // Font Sizes

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/search_result.dart';
+import '../../../shared/colors.dart';
 import '../../../shared/dimens.dart';
 import '../../../utilities/Common.dart';
 import 'home_viewmodel.dart';
-import '../../../shared/Colors.dart';
 import '../../../shared/assets.dart'; // Import assets file
 import '../../../shared/strings.dart'; // Import strings file
 
@@ -66,7 +66,8 @@ class HomeView extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
+            child:
+            TextField(
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Common.hexToColor(bannerWhite),
@@ -75,6 +76,14 @@ class HomeView extends StatelessWidget {
                   horizontal: kHorizontalSpacing,
                 ),
                 hintText: Strings.searchHint,
+                hintStyle: TextStyle(
+                  color: Colors.grey, // Customize the hint text color
+                ),
+                prefixIcon: Icon(
+                  size:kSearchIconSize,
+                  Icons.search,
+                  color: Common.hexToColor(searchIconGrey), // Adjust the color as needed
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(kSearchFieldBorderRadius),
                   borderSide: BorderSide.none,
