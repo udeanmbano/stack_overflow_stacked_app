@@ -2,12 +2,17 @@ import 'package:stacked/stacked.dart';
 import '../../../app/app.locator.dart';
 import '../../../models/search_result.dart';
 import '../../../services/search_data_service.dart';
+import '../../../services/logger_service.dart'; // Import the LoggerService
 
 class HomeViewModel extends BaseViewModel {
   final _searchService = locator<SearchDataService>();
+  final _logger = locator<LoggerService>(); // Access the LoggerService
 
-  List<Items>? _results = [];
-  List<Items>? get results => _results;
+  List<Item>? _results = [];
+  List<Item>? get results => _results;
+
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
 
   // Constructor to initialize the search with an empty query
   HomeViewModel() {
@@ -22,11 +27,20 @@ class HomeViewModel extends BaseViewModel {
   // Method to fetch search results
   Future<void> fetchSearchResults(String query) async {
     setBusy(true);
+    _errorMessage = null;  // Clear any previous error message
     try {
+      _logger.i("Fetching search results for query: $query"); // Log the query being fetched
       final result = await _searchService.fetchResults(query);
-      _results = result.items;
+
+      if (result.items!.isEmpty) {
+        _errorMessage = 'No results found';
+        _logger.w("No results found for query: $query"); // Log warning if no results
+      } else {
+        _results = result.items;
+      }
     } catch (e) {
-      setError('Failed to fetch results');
+      _errorMessage = 'Failed to fetch results: $e';
+      _logger.e("Error fetching search results for query: $query, error: $e"); // Log error message
     } finally {
       setBusy(false);
     }

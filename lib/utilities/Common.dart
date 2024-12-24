@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Common {
   /// Converts a hex color string (e.g., "#FFFFFF" or "FFFFFF") to a [Color].
@@ -29,5 +30,14 @@ class Common {
   static String _removeHtmlTags(String htmlString) {
     final RegExp exp = RegExp(r'<[^>]*>');
     return htmlString.replaceAll(exp, '');
+  }
+
+  static String formatDate(int timestamp) {
+    // Convert timestamp to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    // Format the DateTime to the desired format
+    var formatter = DateFormat("MMM d 'yy");
+    return formatter.format(date);
   }
 }

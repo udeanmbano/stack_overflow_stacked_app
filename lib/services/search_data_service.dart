@@ -11,7 +11,6 @@ class SearchDataService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print(jsonDecode(response.body));
       return SearchResult.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load search results');

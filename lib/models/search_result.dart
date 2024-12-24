@@ -6,7 +6,7 @@ part 'search_result.g.dart';
 @freezed
 class SearchResult with _$SearchResult {
   const factory SearchResult({
-    List<Items>? items,
+    List<Item>? items,
     bool? hasMore,
     int? quotaMax,
     int? quotaRemaining,
@@ -17,16 +17,16 @@ class SearchResult with _$SearchResult {
 }
 
 @freezed
-class Items with _$Items {
-  const factory Items({
+class Item with _$Item {
+  const factory Item({
     List<String>? tags,
     Owner? owner,
-    bool? isAnswered,
-    int? viewCount,
-    int? answerCount,
+    @JsonKey(name: 'is_answered') bool? isAnswered,
+    @JsonKey(name: 'view_count') int? viewCount,
+    @JsonKey(name: 'answer_count') int? answerCount,
     int? score,
-    int? lastActivityDate,
-    int? creationDate,
+    @JsonKey(name: 'last_activity_date') int? lastActivityDate,
+    @JsonKey(name: 'creation_date') int? creationDate,
     int? questionId,
     String? contentLicense,
     String? link,
@@ -35,21 +35,21 @@ class Items with _$Items {
     int? lastEditDate,
     int? acceptedAnswerId,
     int? protectedDate,
-  }) = _Items;
+  }) = _Item;
 
-  factory Items.fromJson(Map<String, dynamic> json) => _$ItemsFromJson(json);
+  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 }
 
 @freezed
 class Owner with _$Owner {
   const factory Owner({
     int? reputation,
-    int? userId,
-    String? userType,
-    String? profileImage,
-    String? displayName,
+    @JsonKey(name: 'user_id') int? userId,
+    @JsonKey(name: 'user_type') String? userType,
+    @JsonKey(name: 'profile_image') String? profileImage,
+    @JsonKey(name: 'display_name') String? displayName, // Correct placement of @JsonKey
     String? link,
-    int? acceptRate,
+    @JsonKey(name: 'accept_rate') int? acceptRate,
   }) = _Owner;
 
   factory Owner.fromJson(Map<String, dynamic> json) => _$OwnerFromJson(json);
